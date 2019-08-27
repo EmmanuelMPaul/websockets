@@ -36,4 +36,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function avatar()
+    {
+        return 'https://secure.gravatar.com/avatar/9e5659f3569495b8dab9c8ea592b6d19';
+    }
 }

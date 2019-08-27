@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Transformers\PostTransformer;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -11,6 +12,9 @@ class PostController extends Controller
     {
         $posts = Post::get();
 
-        return  $posts;
+        return  fractal()
+            ->collection($posts)
+            ->transformWith(new PostTransformer())
+            ->toArray();
     }
 }

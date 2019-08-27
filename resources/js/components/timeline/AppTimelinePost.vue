@@ -1,14 +1,25 @@
-<template>
+<template  v-if="post">
   <div class="timeline__post media">
-    <img src class="timeline__avatar mr-3 rounded" alt />
+    <img :src="post.author.data.avatar" class="timeline__avatar mr-3 rounded" alt />
     <div class="media-body">
-      <div class="font-weight-bold">Emmanuel Paul</div>
-      <p>What do we say to the God of Death? Not today</p>
+      <div class="font-weight-bold">{{post.author.data.name}}</div>
+
+      <p>{{post.body}}</p>
 
       <app-timeline-post-likes />
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    post: {
+      required: true,
+      type: Object
+    }
+  }
+};
+</script>
 <style>
 .timeline__post {
   background: #fff;
