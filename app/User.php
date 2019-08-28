@@ -37,12 +37,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+  /**
+     * get user avatar.
+     *
+     */
+    //
     public function avatar()
     {
         return 'https://secure.gravatar.com/avatar/9e5659f3569495b8dab9c8ea592b6d19';
     }
 
+    /**
+     * define user and post relationship.
+     *
+     */
+  
     public function posts()
     {
         return $this->hasMany(Post::class);

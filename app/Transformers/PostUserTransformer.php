@@ -7,6 +7,11 @@ use League\Fractal\TransformerAbstract;
 
 class PostUserTransformer extends TransformerAbstract
 {
+    /**
+     * The attributes that are include to Post User response .
+     *
+     * @var array
+     */
     protected $defaultIncludes = [
         'owner',
         'liked',
@@ -21,14 +26,22 @@ class PostUserTransformer extends TransformerAbstract
     {
         return [];
     }
-
+    /**
+     * A Fractal transformer include post owner.
+     *
+     * @return array
+     */
     public function includeOwner(Post $post)
     {
         return $this->primitive($post, function ($post) {
             return optional(auth()->user())->id === $post->user_id;
         });
     }
-
+    /**
+     * A Fractal transformer include liked post.
+     *
+     * @return array
+     */
     public function includeliked(Post $post)
     {
         return $this->primitive($post, function ($post) {
@@ -38,6 +51,12 @@ class PostUserTransformer extends TransformerAbstract
             return $post->likers->contains($user);
         });
     }
+    
+    /**
+     * A Fractal transformer include liking limit.
+     *
+     * @return array
+     */
     public function includeLikesRemaining(Post $post)
     {
         return $this->primitive($post, function ($post) {

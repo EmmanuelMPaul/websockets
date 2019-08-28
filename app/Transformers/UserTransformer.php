@@ -8,7 +8,7 @@ use League\Fractal\TransformerAbstract;
 class UserTransformer extends TransformerAbstract
 {
     /**
-     * A Fractal transformer.
+     * A Fractal transformer user data.
      *
      * @return array
      */

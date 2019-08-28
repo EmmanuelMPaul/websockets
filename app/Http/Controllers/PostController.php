@@ -9,11 +9,20 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    /**
+     * check if user is authenticated
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Show all posts
+     *
+     * @return array
+     */
     public function index()
     {
         $posts = Post::latest()->get();
@@ -23,7 +32,11 @@ class PostController extends Controller
             ->transformWith(new PostTransformer())
             ->toArray();
     }
-
+    /**
+     * Show the single post
+     *  @param post
+     * @return array
+     */
     public function show(Post $post)
     {
         $posts = Post::latest()->get();
@@ -33,7 +46,11 @@ class PostController extends Controller
             ->transformWith(new PostTransformer())
             ->toArray();
     }
-
+    /**
+     * store post to database.
+     * @param $request
+     * @return array
+     */
     public function store(Request $request)
     {
         $this->validate($request, [

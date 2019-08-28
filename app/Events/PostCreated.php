@@ -32,13 +32,18 @@ class PostCreated implements ShouldBroadcast
     {
         $this->post = $post;
     }
-
+    
+    /**
+     *  broadcast post id to active connections.
+     *
+     * @return \Illuminate\Broadcasting\Channel|array
+     */
     public function broadcastWith()
     {
         return  [
-            'post' =>[
+            'post' => [
                 'id' => $this->post->id
-            ]            
+            ]
         ];
     }
 
