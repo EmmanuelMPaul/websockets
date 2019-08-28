@@ -31,6 +31,7 @@ Vue.component('app-timeline-post-likes', require('./components/timeline/AppTimel
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 import store from './store'
+
 const app = new Vue({
     el: '#app',
     store

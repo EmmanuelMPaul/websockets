@@ -25,6 +25,15 @@ export default new Vuex.Store({
             let posts = state.posts.slice()
             posts.unshift(post)
             state.posts = posts
+        },
+        UPDATE_POST(state, post) {
+            state.posts = state.posts.map((p) => {
+                if (p.id === post.id) {
+                    return post
+                }
+                return p
+            })
+
         }
     },
     actions: {
@@ -36,6 +45,10 @@ export default new Vuex.Store({
         async createPost({ commit }, data) {
             let post = await axios.post("api/posts", data);
             commit('PREPEND_POST', post.data.data)
+        },
+        async likePost({ commit }, id) {
+            let post = await axios.post(`api/posts/${id}/likes`);
+            commit('UPDATE_POST', post.data.data)
         }
     }
 

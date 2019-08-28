@@ -9,7 +9,8 @@ class PostUserTransformer extends TransformerAbstract
 {
     protected $defaultIncludes = [
         'owner',
-        'liked'
+        'liked',
+        'likes_remaining'
     ];
     /**
      * A Fractal transformer.
@@ -20,7 +21,15 @@ class PostUserTransformer extends TransformerAbstract
     {
         return [];
     }
+
     public function includeOwner(Post $post)
+    {
+        return $this->primitive($post, function ($post) {
+            return optional(auth()->user())->id === $post->user_id;
+        });
+    }
+
+    public function includeliked(Post $post)
     {
         return $this->primitive($post, function ($post) {
             if (!$user = auth()->user()) {
@@ -29,11 +38,13 @@ class PostUserTransformer extends TransformerAbstract
             return $post->likers->contains($user);
         });
     }
-
-    public function includeliked(Post $post)
+    public function includeLikesRemaining(Post $post)
     {
         return $this->primitive($post, function ($post) {
-            return optional(auth()->user())->id === $post->user_id;
+            if (!$user = auth()->user()) {
+                return false;
+            }
+            return $post->likesRemainingFor($user);
         });
     }
 }

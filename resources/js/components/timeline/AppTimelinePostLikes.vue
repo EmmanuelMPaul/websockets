@@ -7,8 +7,8 @@
       >(including you)</template>
     </span>
     <ul class="list-inline mb-0">
-      <li class="list-inline-item" v-if="!post.user.data.owner">
-        <a href>like it</a>
+      <li class="list-inline-item" v-if="canLike">
+        <a href="#" @click.prevent="like">like it</a>
       </li>
     </ul>
   </div>
@@ -16,6 +16,7 @@
 
 <script>
 import pluralize from "pluralize";
+import { mapActions } from "vuex";
 export default {
   props: {
     post: {
@@ -24,7 +25,24 @@ export default {
     }
   },
   methods: {
-    pluralize
+    pluralize,
+    ...mapActions({
+      likePost: "likePost"
+    }),
+    like() {
+      this.likePost(this.post.id);
+    }
+  },
+  computed: {
+    canLike() {
+      if (this.post.user.data.owner) {
+        return false;
+      }
+      if (this.post.user.data.likes_remaining <= 0) {
+        return false;
+      }
+      return true;
+    }
   }
 };
 </script>
