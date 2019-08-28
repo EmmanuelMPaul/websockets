@@ -5,6 +5,10 @@
       <textarea class="form-control" placeholder="share something" rows="3" v-model="form.body"></textarea>
     </div>
     <button type="submit" class="btn btn-primary btn-block">Post it</button>
+
+    <template v-if="error">
+      <p class="error alert alert-danger">{{error}}</p>
+    </template>
   </form>
 </template>
 <script>
@@ -13,8 +17,9 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
+      error: null,
       form: {
-        body: ""
+        body: null
       }
     };
   },
@@ -24,9 +29,19 @@ export default {
     }),
 
     async submit() {
-      await this.createPost(this.form);
-      this.form.body = "";
+      this.error = "";
+      if (!this.form.body) {
+        this.error = "post required.";
+      } else {
+        await this.createPost(this.form);
+        this.form.body = "";
+      }
     }
   }
 };
 </script>
+<style >
+.error {
+  margin-top: 5px;
+}
+</style>

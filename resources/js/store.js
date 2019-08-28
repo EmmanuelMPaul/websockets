@@ -35,7 +35,6 @@ export default new Vuex.Store({
         },
         async createPost({ commit }, data) {
             let post = await axios.post("api/posts", data);
-
             commit('PREPEND_POST', post.data.data)
         }
     }
