@@ -37,7 +37,10 @@ return [
             'app_id' => env('PUSHER_APP_ID'),
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
-                'encrypted' => true,
+                'encrypted' =>env('PUSHER_APP_ECRYPTION'),
+                'host' => env('BROADCAST_HOST'),
+                'port' => env('BROADCAST_PORT'),
+                'scheme' => env('BROADCAST_SCHEME'),
             ],
         ],
 

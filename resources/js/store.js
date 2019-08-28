@@ -42,10 +42,24 @@ export default new Vuex.Store({
 
             commit('SET_POSTS', posts.data.data)
         },
+
+        async getPost({ commit }, id) {
+            let post = await axios.get(`api/posts/${id}`)
+
+            commit('PREPEND_POST', post.data.data)
+        },
+
+         async refreshPost({ commit }, id) {
+            let post = await axios.get(`api/posts/${id}`)
+
+            commit('UPDATE_POST', post.data.data)
+        },
+        
         async createPost({ commit }, data) {
             let post = await axios.post("api/posts", data);
             commit('PREPEND_POST', post.data.data)
         },
+
         async likePost({ commit }, id) {
             let post = await axios.post(`api/posts/${id}/likes`);
             commit('UPDATE_POST', post.data.data)
