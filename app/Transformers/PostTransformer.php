@@ -8,7 +8,8 @@ use League\Fractal\TransformerAbstract;
 class PostTransformer extends TransformerAbstract
 {
     protected $defaultIncludes = [
-        'author'
+        'author',
+        'likers'
     ];
     /**
      * A Fractal transformer.
@@ -17,14 +18,20 @@ class PostTransformer extends TransformerAbstract
      */
     public function transform(Post $post)
     {
+
         return [
             'id' => $post->id,
-            'body' => $post->body
+            'body' => $post->body,
+            'likes' => $post->likes->count(),
         ];
     }
 
     public function includeAuthor(Post $post)
     {
         return $this->item($post->user, new UserTransformer());
+    }
+    public function includeLikers(Post $post)
+    {
+        return $this->collection($post->likers, new UserTransformer());
     }
 }

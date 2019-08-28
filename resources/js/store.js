@@ -16,9 +16,14 @@ export default new Vuex.Store({
             return state.posts
         }
     },
-
     mutations: {
         SET_POSTS(state, posts) {
+            state.posts = posts
+        },
+
+        PREPEND_POST(state, post) {
+            let posts = state.posts.slice()
+            posts.unshift(post)
             state.posts = posts
         }
     },
@@ -27,6 +32,11 @@ export default new Vuex.Store({
             let posts = await axios.get("api/posts");
 
             commit('SET_POSTS', posts.data.data)
+        },
+        async createPost({ commit }, data) {
+            let post = await axios.post("api/posts", data);
+
+            commit('PREPEND_POST', post.data.data)
         }
     }
 
