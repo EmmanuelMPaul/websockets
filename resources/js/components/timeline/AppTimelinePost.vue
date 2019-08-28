@@ -1,12 +1,14 @@
 <template  v-if="post">
   <div class="timeline__post media">
     <img :src="post.author.data.avatar" class="timeline__avatar mr-3 rounded" alt />
+    
     <div class="media-body">
       <div class="font-weight-bold">{{post.author.data.name}}</div>
 
       <p>{{post.body}}</p>
 
       <app-timeline-post-likes :post="post" />
+
     </div>
   </div>
 </template>

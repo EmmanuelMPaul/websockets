@@ -6,11 +6,13 @@
         v-if="post.user.data.liked"
       >(including you)</template>
     </span>
+
     <ul class="list-inline mb-0">
       <li class="list-inline-item" v-if="canLike">
         <a href="#" @click.prevent="like">like it</a>
       </li>
     </ul>
+
   </div>
 </template>
 
@@ -35,10 +37,12 @@ export default {
   },
   computed: {
     canLike() {
+        //check if user owns a post then prevent liking
       if (this.post.user.data.owner) {
         return false;
       }
-      if (this.post.user.data.likes_remaining <= 0) {
+      //check if user can like based on likes limit
+      if (this.post.user.data.likes_remaining <= 0) { 
         return false;
       }
       return true;

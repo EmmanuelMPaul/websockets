@@ -1776,6 +1776,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1804,6 +1806,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   break;
                 }
 
+                // validate input
                 this.error = "post required.";
                 _context.next = 8;
                 break;
@@ -1843,6 +1846,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -1900,6 +1905,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1920,9 +1927,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }),
   computed: {
     canLike: function canLike() {
+      //check if user owns a post then prevent liking
       if (this.post.user.data.owner) {
         return false;
-      }
+      } //check if user can like based on likes limit
+
 
       if (this.post.user.data.likes_remaining <= 0) {
         return false;
