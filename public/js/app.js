@@ -63295,6 +63295,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
+//import/require store module
+ //listen to chain of events then dispatched vuex events
 
 Echo.channel('posts').listen('PostCreated', function (e) {
   _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('getPost', e.post.id);
@@ -63326,28 +63328,36 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//import/require modules
 
 
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+ //attach vuex to Vue
+
+vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]); //export data store
 
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+  //initialize state
   state: {
     posts: []
   },
   getters: {
+    //get all posts
     posts: function posts(state) {
       return state.posts;
     }
   },
   mutations: {
+    //add post to posts array store
     SET_POSTS: function SET_POSTS(state, posts) {
       state.posts = posts;
     },
+    //add new post to the posts array in the store
     PREPEND_POST: function PREPEND_POST(state, post) {
       var posts = state.posts.slice();
       posts.unshift(post);
       state.posts = posts;
     },
+    //update single post in posts array in the store
     UPDATE_POST: function UPDATE_POST(state, post) {
       state.posts = state.posts.map(function (p) {
         if (p.id === post.id) {
@@ -63359,6 +63369,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     }
   },
   actions: {
+    //fetch all post from the server
     getPosts: function () {
       var _getPosts = _asyncToGenerator(
       /*#__PURE__*/
@@ -63390,6 +63401,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
       return getPosts;
     }(),
+    //fetch single post from the server
     getPost: function () {
       var _getPost = _asyncToGenerator(
       /*#__PURE__*/
@@ -63421,6 +63433,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
       return getPost;
     }(),
+    //fetch single post fron the server and update fetched post in the store
     refreshPost: function () {
       var _refreshPost = _asyncToGenerator(
       /*#__PURE__*/
@@ -63452,6 +63465,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
       return refreshPost;
     }(),
+    //send post request to create a single post then add to the posts array in the store
     createPost: function () {
       var _createPost = _asyncToGenerator(
       /*#__PURE__*/
@@ -63483,6 +63497,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
       return createPost;
     }(),
+    //send post request to create a like record then update that post in the store
     likePost: function () {
       var _likePost = _asyncToGenerator(
       /*#__PURE__*/
