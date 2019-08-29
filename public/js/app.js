@@ -1777,7 +1777,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -63364,10 +63363,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     PREPEND_POST: function PREPEND_POST(state, post) {
       var posts = state.posts.slice();
       posts.unshift(post);
-      state.posts = posts; //add notification to new post
-
-      var audio = new Audio('audio/newpost.mp3');
-      audio.play();
+      state.posts = posts;
     },
     //update single post in posts array in the store
     UPDATE_POST: function UPDATE_POST(state, post) {
@@ -63418,7 +63414,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       var _getPost = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref2, id) {
-        var commit, post;
+        var commit, post, audio;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -63429,9 +63425,12 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
               case 3:
                 post = _context2.sent;
-                commit('PREPEND_POST', post.data.data);
+                commit('PREPEND_POST', post.data.data); //add notification to new post
 
-              case 5:
+                audio = new Audio('audio/newpost.mp3');
+                audio.play();
+
+              case 7:
               case "end":
                 return _context2.stop();
             }

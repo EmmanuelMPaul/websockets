@@ -30,9 +30,6 @@ export default new Vuex.Store({
             posts.unshift(post)
             state.posts = posts
 
-            //add notification to new post
-            var audio = new Audio('audio/newpost.mp3');
-            audio.play();
         },
         //update single post in posts array in the store
         UPDATE_POST(state, post) {
@@ -56,12 +53,19 @@ export default new Vuex.Store({
             let post = await axios.get(`api/posts/${id}`)
 
             commit('PREPEND_POST', post.data.data)
+
+            //add notification to new post
+            var audio = new Audio('audio/newpost.mp3');
+            audio.play();
+
         },
         //fetch single post fron the server and update fetched post in the store
         async refreshPost({ commit }, id) {
             let post = await axios.get(`api/posts/${id}`)
 
             commit('UPDATE_POST', post.data.data)
+
+
         },
         //send post request to create a single post then add to the posts array in the store
         async createPost({ commit }, data) {

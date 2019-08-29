@@ -1,6 +1,25 @@
 ## About
+
 <p align="center">Learning websockets : simple app</p>
 <p align="center">An app that allows users to post their daily routine to a shared timeline and like them, updates in realtime using the Laravel Websockets package.</P>
+
+## Requirements
+
+-   PHP < 7.1
+-   Node.js >= 8 and npm >= 5
+-   [git](https://git-scm.com)
+-   composer
+
+## Usage
+
+```bash
+    - git clone https://github.com/EmmanuelMPaul/websockets.git
+    $ composer install
+    $ npm install
+    $ npm run watch
+    $ php artisan websockets:serve
+```
+
 <p align="center"><img src="https://repository-images.githubusercontent.com/204768206/57ea4c80-ca09-11e9-9597-ed265349a262" width="500"></p>
 <p align="center"> THANKS TO</p>
 <p align="center"> <a href="https://laravel.com/"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></a></P>
