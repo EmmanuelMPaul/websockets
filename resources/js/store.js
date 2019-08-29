@@ -29,6 +29,10 @@ export default new Vuex.Store({
             let posts = state.posts.slice()
             posts.unshift(post)
             state.posts = posts
+
+            //add notification to new post
+            var audio = new Audio('audio/newpost.mp3');
+            audio.play();
         },
         //update single post in posts array in the store
         UPDATE_POST(state, post) {
@@ -68,7 +72,7 @@ export default new Vuex.Store({
         //send post request to create a like record then update that post in the store
         async likePost({ commit }, id) {
             let post = await axios.post(`api/posts/${id}/likes`);
-            
+
             commit('UPDATE_POST', post.data.data)
         }
     }

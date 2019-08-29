@@ -63364,7 +63364,10 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     PREPEND_POST: function PREPEND_POST(state, post) {
       var posts = state.posts.slice();
       posts.unshift(post);
-      state.posts = posts;
+      state.posts = posts; //add notification to new post
+
+      var audio = new Audio('audio/newpost.mp3');
+      audio.play();
     },
     //update single post in posts array in the store
     UPDATE_POST: function UPDATE_POST(state, post) {
